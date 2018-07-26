@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="newsFeed.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/prism.css">
+
+</head>
+<body>
+    <div id="fnfLayout2Layout">
+        <div class="row">
+            <div class="col-6">
+                <div class="fnf-newsTicker-layout2-left-div">
+                   <h4>Example Style</h4>
+                    <pre class="language-css" style="background:gray;">
+                        <code class="language-css">
+                                var nt_example2 = $('#nt-example2').newsTicker({
+                                    row_height: 60,
+                                    max_rows: 1,
+                                    speed: 300,
+                                    duration: 6000,
+                                    prevButton: $('#nt-example2-prev'),
+                                    nextButton: $('#nt-example2-next'),
+                            
+                                
+                        </code>
+                    </pre>
+            </div>
+            </div>
+            <div class="col-6">
+                <div class="fnf-newsTicker-wrapper-right-side">
+                        <h4>Latest News</h4>
+                        <div class="fnf-newsTicker-layout2-right-div">
+                                <ul class="fnf-newsTicker-layout2-right-div-ul">
+                        
+                                </ul>
+                            </div>
+                            <div id="fnf-newsTicker-layout2-right-div">
+                                    <div id="fnf-newsTicker-infos-container">
+                                                <div id="fnf-newsTicker-infos-triangle"></div>
+                                                <div id="fnf-newsTicker-infos" class="row">
+                                                    <div class="col-4 centered">
+                                                        <div class="fnf-newsTicker-infos-hour">
+                                                            08:12
+                                                        </div>
+                                                        <i class="fa fa-arrow-left" id="fnf-newsTicker-prev"></i>
+                                                        <i class="fa fa-arrow-right" id="fnf-newsTicker-next"></i>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="fnf-newsTicker-infos-text fnf-newsTicker-layout2-right-div-ul-des">
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="newsFeed.js"></script>
+    <script src="assets/prism.js"></script>
+
+
+    <script>
+        var show = $('.fnf-newsTicker-layout2-right-div-ul').newsFeed({
+            move:'left',
+            speed: 300,
+        }) ; 
+    </script>
+</body>
+</html>
