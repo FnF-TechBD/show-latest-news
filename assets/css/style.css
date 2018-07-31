@@ -29,6 +29,9 @@
     text-decoration: none;
   
 }
+.fnf-newsTicker-layout2-right-div-ul li a{
+    text-decoration: none;
+}
 #fnf-newsTicker-infos-triangle {
 	width: 0px;
 	height: 0px;

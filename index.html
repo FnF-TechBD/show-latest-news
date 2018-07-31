@@ -45,16 +45,18 @@
                                     <div id="fnf-newsTicker-infos-container">
                                                 <div id="fnf-newsTicker-infos-triangle"></div>
                                                 <div id="fnf-newsTicker-infos" class="row">
-                                                    <div class="col-4 centered">
+                                                    <div class="col-3 centered">
                                                         <div class="fnf-newsTicker-infos-hour">
                                                             08:12
                                                         </div>
                                                         <i class="fa fa-arrow-left" id="fnf-newsTicker-prev"></i>
                                                         <i class="fa fa-arrow-right" id="fnf-newsTicker-next"></i>
                                                     </div>
-                                                    <div class="col-8">
+                                                    <div class="col-9">
                                                         <div class="fnf-newsTicker-infos-text fnf-newsTicker-show-news-description">
-                                                        
+                                                        <ul class="fnf-newsTicker-show-news-description">
+
+                                                        </ul>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -74,7 +76,7 @@
 
     <script>
         var show = $('.fnf-newsTicker-show-news').newsFeed({
-            direction:'left',
+            direction:'down',
             speed: 300,
         }) ; 
     </script>

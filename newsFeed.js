@@ -101,7 +101,6 @@
 
         start: function(){
            let  count = 0;
-           
            if(! this.state ){
                this.state = 1;
                this.resetInterval();
@@ -138,12 +137,16 @@
                 if (!this.moving) {
                         this.moving = 1;
                         this.parameters.movingDown();
+                         let des = this.$selector.children('li:last');
+                            $('.fnf-newsTicker-show-news-description').html(des.text());
+                        
                         this.$selector.children('li:last').detach().prependTo(this.$selector).css('marginTop', '-' + this.parameters.row_height + 'px')
                                 .animate({
                                     marginTop: '0px'}, this.parameters.speed, function(){
                                         this.moving = 0;
                                         this.parameters.hasMoved();
                                 }.bind(this));
+
                 }
         },
 
@@ -152,6 +155,8 @@
                         this.moving = 1;
                         this.parameters.movingUp();
                         var element = this.$selector.children('li:first');
+                        $('.fnf-newsTicker-show-news-description').html(element.text());
+                        
                         element.animate({
                             marginTop: '-' + this.parameters.row_height + 'px'}, this.parameters.speed,
                                 function(){
@@ -168,6 +173,7 @@
                     this.moving = 1;
                     this.parameters.movingLeft();
                     let element = this.$selector.children('li:first');
+                    $('.fnf-newsTicker-show-news-description').html(element.text());
                     element.animate({
                         marginLeft: '-' + this.getDivWidthForDisplayingNews() + 'px'
                     }, this.parameters.speed,
@@ -185,6 +191,7 @@
               this.moving = 1;
               this.parameters.movingRight();
               let element =  this.$selector.children('li:first');
+              $('.fnf-newsTicker-show-news-description').html(element.text());
               element.animate({
                   marginLeft: '+' + this.getDivWidthForDisplayingNews() + 'px'
               },this.parameters.speed,
@@ -234,16 +241,16 @@
                         success:function(data) {
                             console.log(data + 'News fetching...');
                           let newsCollection = [], title, link;
+                          let newsDescription = [];
                             $(data).find("item").each(function () { 
                                  this.title = $(this).find("title").text();
                                  this.link  = $(this).find("link").text();
-                            
-                                newsCollection.push('<li><a href="'+this.link+'" class="fnfnewstitle">'+this.title+'</a></li>');
-                            
+                                 this.description = $(this).find("description").text();   
+                                newsCollection.push('<li class="description"><a href="'+this.link+'" class="fnfnewstitle">'+this.title+'</a>'+this.description+'</li>');
+                                //newsDescription.push(this.description);
                             });
 
                             $('.fnf-newsTicker-show-news').html(newsCollection);
-                            
                 
                         },
                         error:function(error){
