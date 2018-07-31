@@ -15,10 +15,10 @@
     margin: 35px 1px 0px 60px;
 }
 
-.fnf-newsTicker-layout2-right-div-ul{
+.fnf-newsTicker-show-news{
     margin-bottom: 1px;
 }
-.fnf-newsTicker-layout2-right-div-ul li{
+.fnf-newsTicker-show-news li{
 	list-style: none;
     white-space: nowrap;
     overflow: hidden;

@@ -37,8 +37,8 @@
                 <div class="fnf-newsTicker-wrapper-right-side">
                         <h4>Latest News</h4>
                         <div class="fnf-newsTicker-layout2-right-div">
-                                <ul class="fnf-newsTicker-layout2-right-div-ul">
-                        
+                                <ul class="fnf-newsTicker-show-news">
+                                
                                 </ul>
                             </div>
                             <div id="fnf-newsTicker-layout2-right-div">
@@ -53,7 +53,7 @@
                                                         <i class="fa fa-arrow-right" id="fnf-newsTicker-next"></i>
                                                     </div>
                                                     <div class="col-8">
-                                                        <div class="fnf-newsTicker-infos-text fnf-newsTicker-layout2-right-div-ul-des">
+                                                        <div class="fnf-newsTicker-infos-text fnf-newsTicker-show-news-description">
                                                         
                                                         </div>
                                                     </div>
@@ -69,12 +69,12 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="assets/js/bootstrap.js"></script>
     <script src="newsFeed.js"></script>
-    <script src="assets/prism.js"></script>
+    <!-- <script src="assets/prism.js"></script> -->
 
 
     <script>
-        var show = $('.fnf-newsTicker-layout2-right-div-ul').newsFeed({
-            move:'left',
+        var show = $('.fnf-newsTicker-show-news').newsFeed({
+            move:'down',
             speed: 300,
         }) ; 
     </script>
