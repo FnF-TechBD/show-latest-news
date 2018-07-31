@@ -5,10 +5,10 @@
     'use strict';
     let pluginName = 'newsFeed';
     let defaultParameters = {
-        speed: 400,
-        direction: 'up',
-        duration:2500,
-        row_height: 50,
+        speed: 150,
+        direction: 'right',
+        duration: 3000,
+        row_height: 65,
         pauseOnHover: 1,
         autoStart: 1,
         max_row : 1,
@@ -16,6 +16,7 @@
         start: function(){},
         stop: function(){},
         pause: function(){},
+        unpause: function(){},
         hasMoved: function() {},
         movingUp: function() {},
         movingDown: function() {},
@@ -50,16 +51,17 @@
         
         this.selector = selector;
         this.$selector = $(selector);
+        this.moveInterval = 3000;
         this.parameters = $.extend({},defaultParameters,parameters);
         this.state = 0;
-        this.moveInterval = 3000;
         this.paused = 0;
         this.moving = 0;
         
-            this.getNewsFeed();
+            this.getNewsFeed();      //fetching news...
             if(this.$selector.is('ul,li')){
                 this.initialize();
                     }
+               
             
             function dateFormat(pubDate) {
                 var date = new Date(pubDate);
@@ -78,13 +80,27 @@
             this.$selector.height(this.parameters.row_height * this.parameters.max_row).css({
                 overflow: 'hidden'
             });
+
+            this.checkSpeed();
+           
+            if(this.parameters.pauseOnHover){
+                this.$selector.hover(function(){
+                    if(this.state){
+                        this.pause();
+                    }
+                }.bind(this), function(){
+                    if(this.state){
+                        this.unpause();
+                    }
+                }.bind(this));
+            }     
             if(this.parameters.autoStart){
                this.start(); 
             }
         },
 
         start: function(){
-           let  count =0;
+           let  count = 0;
            
            if(! this.state ){
                this.state = 1;
@@ -119,7 +135,6 @@
                 }        
         },
         moveDown: function() {
-            //console.log(this.parameters.row_height);
                 if (!this.moving) {
                         this.moving = 1;
                         this.parameters.movingDown();
@@ -140,28 +155,65 @@
                         element.animate({
                             marginTop: '-' + this.parameters.row_height + 'px'}, this.parameters.speed,
                                 function(){
-                                        element.detach().css('marginTop', '0').appendTo(this.$selector);
+                                        element.detach().css('marginTop', '0px').appendTo(this.$selector);
                                         this.moving = 0;
                                         this.parameters.hasMoved();
                                 }.bind(this));
                 }
         },
+
         moveLeft: function(){
-            let width = $('#fnf-newsTicker-layout2-right-div').width();
-            
+         
                 if(!this.moving){
                     this.moving = 1;
                     this.parameters.movingLeft();
                     let element = this.$selector.children('li:first');
                     element.animate({
-                        marginLeft: '-' + width + 'px'
+                        marginLeft: '-' + this.getDivWidthForDisplayingNews() + 'px'
                     }, this.parameters.speed,
                    function(){
-                        element.detach().css('marginLeft','0').appendTo(this.$selector);
+                        element.detach().css('marginLeft','0px').appendTo(this.$selector);
                         this.moving = 0;
                         this.parameters.hasMoved();
                     }.bind(this));
                 }
+        },
+        moveRight: function(){
+
+          if(!this.moving){
+              
+              this.moving = 1;
+              this.parameters.movingRight();
+              let element =  this.$selector.children('li:first');
+              element.animate({
+                  marginLeft: '+' + this.getDivWidthForDisplayingNews() + 'px'
+              },this.parameters.speed,
+            function(){
+                element.detach().css('marginLeft','0px').appendTo(this.$selector);
+                this.moving = 0;
+                this.parameters.hasMoved();
+                
+            }.bind(this));
+          }
+        },
+        pause: function(){
+            if(!this.paused){
+                this.paused = 1;
+                this.parameters.pause();
+            }
+        },
+        unpause: function(){
+            if(this.paused){
+                this.paused = 0;
+                this.parameters.unpause();
+            }    
+        },
+        checkSpeed: function() {
+            if (this.parameters.duration < (this.parameters.speed + 25))
+                    this.parameters.speed = this.parameters.duration - 25;
+        },
+        getDivWidthForDisplayingNews: function(){
+           return $('#fnf-newsTicker-layout2-right-div').width();
         },
         getNewsFeed: function(){
             
