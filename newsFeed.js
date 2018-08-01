@@ -252,11 +252,15 @@
                                  this.title = $(this).find("title").text();
                                  this.link  = $(this).find("link").text();
                                  this.description = $(this).find("description").text();   
-                                 newsCollection.push('<li class="description"><a href="'+this.link+'" class="fnfnewstitle">'+this.title+'</a>'+this.description+'</li>');
+                                 newsCollection.push('<li class="description"><a href="'+this.link+'" target="_blank" class="fnfnewstitle">'+this.title+'</a>'+this.description+'</li>');
                                // console.log(this.description + '-------------------------');
                             });
-
-                            $('.fnf-newsTicker-show-news').html(newsCollection);
+                             if(newsCollection.length){
+                                $('.fnf-newsTicker-show-news').html(newsCollection);                                
+                             }else{
+                                $('.fnf-newsTicker-show-news').html('No news found.');
+                            
+                             }   
                             
                         },
                         error:function(error){
