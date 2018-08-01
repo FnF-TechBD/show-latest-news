@@ -138,7 +138,7 @@
                         this.moving = 1;
                         this.parameters.movingDown();
                          let des = this.$selector.children('li:last');
-                            $('.fnf-newsTicker-show-news-description').html(des.text());
+                            $('.fnf-newsTicker-show-news-description').html(des.text().slice(0,600));
                         
                         this.$selector.children('li:last').detach().prependTo(this.$selector).css('marginTop', '-' + this.parameters.row_height + 'px')
                                 .animate({
@@ -155,7 +155,7 @@
                         this.moving = 1;
                         this.parameters.movingUp();
                         var element = this.$selector.children('li:first');
-                        $('.fnf-newsTicker-show-news-description').html(element.text());
+                        $('.fnf-newsTicker-show-news-description').html(element.text().slice(0,600));
                         
                         element.animate({
                             marginTop: '-' + this.parameters.row_height + 'px'}, this.parameters.speed,
@@ -173,7 +173,7 @@
                     this.moving = 1;
                     this.parameters.movingLeft();
                     let element = this.$selector.children('li:first');
-                    $('.fnf-newsTicker-show-news-description').html(element.text());
+                    $('.fnf-newsTicker-show-news-description').html(element.text().slice(0,600));
                     element.animate({
                         marginLeft: '-' + this.getDivWidthForDisplayingNews() + 'px'
                     }, this.parameters.speed,
@@ -191,7 +191,7 @@
               this.moving = 1;
               this.parameters.movingRight();
               let element =  this.$selector.children('li:first');
-              $('.fnf-newsTicker-show-news-description').html(element.text());
+              $('.fnf-newsTicker-show-news-description').html(element.text().slice(0,600));
               element.animate({
                   marginLeft: '+' + this.getDivWidthForDisplayingNews() + 'px'
               },this.parameters.speed,
@@ -225,7 +225,7 @@
         getNewsFeed: function(){
             
             //feed to parse
-        let feed = "https://cors-anywhere.herokuapp.com/"+ "http://feeds.bbci.co.uk/news/world/rss.xml";
+        let feed = "https://cors-anywhere.herokuapp.com/"+ "http://abcnews.go.com/abcnews/topstories";
         
               
                     $('.fnf-newsTicker-show-news').html('<li class="fnf-news-headline">News Loading...</li>');
@@ -240,18 +240,18 @@
                         dataType:"xml",
                         success:function(data) {
                             console.log(data + 'News fetching...');
-                          let newsCollection = [], title, link;
-                          let newsDescription = [];
+                            let newsCollection = [], title, link;
+                         
                             $(data).find("item").each(function () { 
                                  this.title = $(this).find("title").text();
                                  this.link  = $(this).find("link").text();
                                  this.description = $(this).find("description").text();   
-                                newsCollection.push('<li class="description"><a href="'+this.link+'" class="fnfnewstitle">'+this.title+'</a>'+this.description+'</li>');
-                                //newsDescription.push(this.description);
+                                 newsCollection.push('<li class="description"><a href="'+this.link+'" class="fnfnewstitle">'+this.title+'</a>'+this.description+'</li>');
+                                console.log(this.description + '-------------------------');
                             });
 
                             $('.fnf-newsTicker-show-news').html(newsCollection);
-                
+                            
                         },
                         error:function(error){
                            // console.log(error);
