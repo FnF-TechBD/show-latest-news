@@ -139,8 +139,8 @@
                         this.parameters.movingDown();
                          let des = this.$selector.children('li:last');
                             $('.fnf-newsTicker-show-news-description').html(des.text().slice(0,600));
-                        
-                        this.$selector.children('li:last').detach().prependTo(this.$selector).css('marginTop', '-' + this.parameters.row_height + 'px')
+                            $('.fnf-newsTicker-infos-hour').html(this.getCurrentTimeWith12HoursFormat());
+                           this.$selector.children('li:last').detach().prependTo(this.$selector).css('marginTop', '-' + this.parameters.row_height + 'px')
                                 .animate({
                                     marginTop: '0px'}, this.parameters.speed, function(){
                                         this.moving = 0;
@@ -156,7 +156,7 @@
                         this.parameters.movingUp();
                         var element = this.$selector.children('li:first');
                         $('.fnf-newsTicker-show-news-description').html(element.text().slice(0,600));
-                        
+                        $('.fnf-newsTicker-infos-hour').html(this.getCurrentTimeWith12HoursFormat()); 
                         element.animate({
                             marginTop: '-' + this.parameters.row_height + 'px'}, this.parameters.speed,
                                 function(){
@@ -174,6 +174,7 @@
                     this.parameters.movingLeft();
                     let element = this.$selector.children('li:first');
                     $('.fnf-newsTicker-show-news-description').html(element.text().slice(0,600));
+                    $('.fnf-newsTicker-infos-hour').html(this.getCurrentTimeWith12HoursFormat());
                     element.animate({
                         marginLeft: '-' + this.getDivWidthForDisplayingNews() + 'px'
                     }, this.parameters.speed,
@@ -192,6 +193,7 @@
               this.parameters.movingRight();
               let element =  this.$selector.children('li:first');
               $('.fnf-newsTicker-show-news-description').html(element.text().slice(0,600));
+              $('.fnf-newsTicker-infos-hour').html(this.getCurrentTimeWith12HoursFormat());
               element.animate({
                   marginLeft: '+' + this.getDivWidthForDisplayingNews() + 'px'
               },this.parameters.speed,
@@ -222,6 +224,10 @@
         getDivWidthForDisplayingNews: function(){
            return $('#fnf-newsTicker-layout2-right-div').width();
         },
+        getCurrentTimeWith12HoursFormat(){
+            var time = new Date();
+            return time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
+        },
         getNewsFeed: function(){
             
             //feed to parse
@@ -247,7 +253,7 @@
                                  this.link  = $(this).find("link").text();
                                  this.description = $(this).find("description").text();   
                                  newsCollection.push('<li class="description"><a href="'+this.link+'" class="fnfnewstitle">'+this.title+'</a>'+this.description+'</li>');
-                                console.log(this.description + '-------------------------');
+                               // console.log(this.description + '-------------------------');
                             });
 
                             $('.fnf-newsTicker-show-news').html(newsCollection);
